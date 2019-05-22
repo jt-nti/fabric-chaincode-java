@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package org.hyperledger.fabric.contract;
 
 import org.hyperledger.fabric.shim.ChaincodeStub;
+import org.hyperledger.fabric.shim.ResponseUtils;
 
 /**
  * Interface all contracts should implement
@@ -29,6 +30,7 @@ public interface ContractInterface {
      * Invoked once method for transaction not exist in contract
      */
     default void unknownTransaction() {
+    	// TODO Is IllegalStateException reasonable, or would it be better to return some sort of ResponseUtils.newErrorResponse response?
         throw new IllegalStateException("Undefined contract method called");
     }
 

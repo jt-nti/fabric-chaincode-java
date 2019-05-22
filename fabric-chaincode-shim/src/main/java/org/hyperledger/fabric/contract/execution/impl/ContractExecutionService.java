@@ -66,6 +66,7 @@ public class ContractExecutionService implements ExecutionService {
                 String str = value.toString();
                 response = ResponseUtils.newSuccessResponse(str.getBytes(UTF_8));
             }
+        // TODO catch IllegalStateException??? What about other exceptions?
         } catch (IllegalAccessException e) {
             logger.warn("Error during contract method invocation", e);
             response = ResponseUtils.newErrorResponse(e);

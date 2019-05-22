@@ -39,6 +39,11 @@ public class SampleContract implements ContractInterface {
     }
 
     @Transaction
+    public String t3() {
+    	throw new RuntimeException("T3 fail!");
+    }
+    
+    @Transaction
     public String t2() {
 
         System.out.println("SampleContract::T2 Done");
