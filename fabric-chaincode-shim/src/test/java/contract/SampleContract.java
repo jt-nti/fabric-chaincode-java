@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.contract.ContractInterface;
+import org.hyperledger.fabric.contract.TransactionException;
 import org.hyperledger.fabric.contract.annotation.Contract;
 import org.hyperledger.fabric.contract.annotation.Default;
 import org.hyperledger.fabric.contract.annotation.Transaction;
@@ -40,8 +41,16 @@ public class SampleContract implements ContractInterface {
     }
 
     @Transaction
-    public String t3(Context ctx) {
-        throw new RuntimeException("T3 fail!");
+    public String t3(Context ctx, String exception, String message) {
+        if ("TransactionException".equals(exception)) {
+            if (message.isEmpty()) {
+                throw new TransactionException(null, "T3ERR1");
+            } else {
+                throw new TransactionException(message, "T3ERR1");
+            }
+        } else {
+            throw new RuntimeException(message);
+        }
     }
 
     @Transaction

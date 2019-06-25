@@ -72,7 +72,7 @@ public interface ContractInterface {
      * @param ctx the context as created by {@link #createContext(ChaincodeStub)}.
      */
     default void unknownTransaction(Context ctx) {
-        throw new IllegalStateException("Undefined contract method called");
+        throw new TransactionException("Undefined contract method called");
     }
 
     /**

@@ -25,7 +25,7 @@ public class ContractInterfaceTest {
 
     @Test
     public void unknownTransaction() {
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(TransactionException.class);
         thrown.expectMessage("Undefined contract method called");
 
         ContractInterface c = new ContractInterface() {
