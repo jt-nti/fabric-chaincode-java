@@ -17,10 +17,15 @@ stages:
     jobs:
       - job: javadoc
         steps:
+        - script: env | sort
+          displayName: 'Wassup'
         - script: ./gradlew javadoc
           displayName: 'Build JavaDoc'
         - script: |
-            git checkout gh-pages
+            git branch
+            git remote -v
+            git fetch origin
+            git branch gh-pages origin/gh-pages
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
           displayName: 'Update gh-pages content'
         - script: |
