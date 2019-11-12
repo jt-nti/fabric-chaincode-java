@@ -22,9 +22,12 @@ stages:
         - script: ./gradlew javadoc
           displayName: 'Build JavaDoc'
         - script: |
-            git branch
             git remote -v
             git fetch origin
+            git branch
+            git branch -r
+            git branch set-branches --add origin gh-pages
+            git branch -a
             git branch gh-pages origin/gh-pages
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
           displayName: 'Update gh-pages content'
