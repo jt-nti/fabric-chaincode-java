@@ -23,15 +23,10 @@ stages:
           displayName: 'Build JavaDoc'
         - script: |
             git remote -v
-            git ls-remote --heads origin gh-pages
-            git ls-remote --heads origin gh-pages-not
-            git ls-remote --heads origin 16712-azure-devops
             git fetch origin
-            git branch
             git branch -r
-            git branch set-branches --add origin gh-pages
-            git branch -a
             git branch gh-pages origin/gh-pages
+            mkdir -p master/api
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
           displayName: 'Update gh-pages content'
         - script: |
