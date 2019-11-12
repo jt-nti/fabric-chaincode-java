@@ -17,6 +17,8 @@ stages:
     jobs:
       - job: javadoc
         steps:
+        - checkout: self
+          persistCredentials: true
         - script: env | sort
           displayName: 'Wassup'
         - script: ./gradlew javadoc
@@ -30,12 +32,13 @@ stages:
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
           displayName: 'Update gh-pages content'
         - script: |
-            git config --local user.name "Azure Pipelines"
-            git config --local user.email "azuredevops@microsoft.com"
+            git config -l
+            echo git config --local user.name "Azure Pipelines"
+            echo git config --local user.email "azuredevops@microsoft.com"
             git status
             git add -A
             git status
             git commit -m "Publishing GitHub Pages [skip ci]"
             git status
-            git push origin gh-pages
+            echo git push origin gh-pages
           displayName: 'Add gh-pages commit'
