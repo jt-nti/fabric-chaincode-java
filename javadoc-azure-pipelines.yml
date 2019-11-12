@@ -23,6 +23,9 @@ stages:
           displayName: 'Build JavaDoc'
         - script: |
             git remote -v
+            git ls-remote --heads origin gh-pages
+            git ls-remote --heads origin gh-pages-not
+            git ls-remote --heads origin 16712-azure-devops
             git fetch origin
             git branch
             git branch -r
