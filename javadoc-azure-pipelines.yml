@@ -32,6 +32,7 @@ stages:
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
           displayName: 'Update gh-pages content'
         - script: |
+            git config core.pager cat
             git config -l
             echo git config --local user.name "Azure Pipelines"
             echo git config --local user.email "azuredevops@microsoft.com"
@@ -40,6 +41,6 @@ stages:
             git status
             git commit -m "Publishing GitHub Pages [skip ci]"
             git status
-            git log -1 --no-pager
+            git log -1
             echo git push origin gh-pages
           displayName: 'Add gh-pages commit'
