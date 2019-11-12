@@ -17,10 +17,16 @@ stages:
     jobs:
       - job: javadoc
         steps:
-        - script: echo Hello, world!
-          displayName: 'Run a one-line script'
-
+        - script: ./gradlew javadoc
+          displayName: 'Build JavaDoc'
         - script: |
-            echo Add other tasks to build, test, and deploy your project.
-            echo See https://aka.ms/yaml
-          displayName: 'Run a multi-line script'
+            git checkout gh-pages
+            cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
+          displayName: 'Update gh-pages content'
+        - script: |
+            git config --local user.name "Azure Pipelines"
+            git config --local user.email "azuredevops@microsoft.com"
+            git add .
+            git commit -m "Publishing GitHub Pages [skip ci]"
+            git push origin gh-pages
+          displayName: 'Add gh-pages commit'
