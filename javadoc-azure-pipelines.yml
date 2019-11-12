@@ -25,7 +25,7 @@ stages:
             git remote -v
             git fetch origin
             git branch -r
-            git branch gh-pages origin/gh-pages
+            git checkout -b gh-pages origin/gh-pages
             mkdir -p master/api
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
           displayName: 'Update gh-pages content'
