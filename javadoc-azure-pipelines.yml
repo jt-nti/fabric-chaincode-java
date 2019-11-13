@@ -28,7 +28,7 @@ stages:
               mkdir gh-pages
               cp -r docs/* gh-pages
             fi
-            mkdir -p gh-pages/_inlcudes
+            mkdir -p gh-pages/_includes
             touch gh-pages/_config.yml gh-pages/404.md gh-pages/index.md gh-pages/_includes/footer.html gh-pages/_includes/header.html gh-pages/_includes/javadocs.html
           displayName: 'Copy shared doc'
           condition: eq(variables['Build.SourceBranch'], 'refs/heads/16712-azure-devops')
