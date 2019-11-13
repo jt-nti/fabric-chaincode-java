@@ -56,5 +56,5 @@ stages:
             git commit -m "Publishing GitHub Pages [skip ci]"
             git status
             git log -2
-            echo git push origin gh-pages
+            git push origin gh-pages
           displayName: 'Add gh-pages commit'
