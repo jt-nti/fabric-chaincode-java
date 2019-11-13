@@ -24,12 +24,23 @@ stages:
         - script: ./gradlew javadoc
           displayName: 'Build JavaDoc'
         - script: |
+            if [ -d docs ]; then
+              mkdir gh-pages
+              cp -r docs/* gh-pages
+            fi
+          displayName: 'Copy shared doc'
+          condition: eq(variables['Build.SourceBranch'], 'refs/heads/16712-azure-devops')
+        - script: |
             git remote -v
             git fetch origin
             git branch -r
             git checkout -b gh-pages origin/gh-pages
             mkdir -p master/api
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
+            if [ -d gh-pages ]; then
+              find . -maxdepth 1 ! \( -name [.]* -o -name 'master' -o -name 'release-*' \) -exec rm -rf {} \;
+              cp -r gh-pages/* .
+            fi
           displayName: 'Update gh-pages content'
         - script: |
             git config core.pager cat
