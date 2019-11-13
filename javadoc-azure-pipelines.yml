@@ -28,6 +28,9 @@ stages:
               mkdir gh-pages
               cp -r docs/* gh-pages
             fi
+            touch _config.yml 404.md index.md
+            mkdir -p _includes
+            touch footer.html header.html javadocs.html
           displayName: 'Copy shared doc'
           condition: eq(variables['Build.SourceBranch'], 'refs/heads/16712-azure-devops')
         - script: |
