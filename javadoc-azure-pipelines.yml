@@ -40,8 +40,9 @@ stages:
             mkdir -p master/api
             cp -r fabric-chaincode-shim/build/docs/javadoc/* master/api
             if [ -d gh-pages ]; then
-              find . -maxdepth 1 ! \( -name [.]* -o -name 'master' -o -name 'release-*' \) -exec rm -rf {} \;
+              find . -maxdepth 1 ! \( -name [.]* -o -name 'gh-pages' -o -name 'master' -o -name 'release-*' \) -exec rm -rf {} \;
               cp -r gh-pages/* .
+              rm -rf gh-pages
             fi
           displayName: 'Update gh-pages content'
         - script: |
